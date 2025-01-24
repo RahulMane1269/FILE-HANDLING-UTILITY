@@ -1,0 +1,122 @@
+package util;
+import java.util.*;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.io.BufferedWriter;
+public class FileHandler
+{
+
+
+	  public static void main(String[] args)
+	  {
+		        String filePath = "sample.txt";
+
+		        // Create and write to a file
+		        writeToFile(filePath, "This is a sample text file.\nHello, World!\n");
+
+		        // Read the content of the file
+		        System.out.println("Original File Content:");
+		        readFromFile(filePath);
+
+		        // Append text to the file
+		        appendToFile(filePath, "Appending a new line to the file.\n");
+
+		        // Read the modified content of the file
+		        System.out.println("\nFile Content After Appending:");
+		        readFromFile(filePath);
+
+		        // Modify specific lines in the file
+		        modifyFile(filePath, "Hello, World!", "Hello, Java!");
+
+		        // Read the content of the file after modification
+		        System.out.println("\nFile Content After Modification:");
+		        readFromFile(filePath);
+	  }
+
+		    /**
+		     * Write content to a file. If the file doesn't exist, it will be created.
+		     *
+		     * @param filePath Path of the file to write to
+		     * @param content  Content to write into the file
+		     */
+		    public static void writeToFile(String filePath, String content)
+		    {
+		        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath)))
+		        {
+		            writer.write(content);
+		            System.out.println("File written successfully.");
+		        } catch (IOException e) 
+		        {
+		            System.err.println("Error writing to file: " + e.getMessage());
+		        }
+		    }
+
+		    /**
+		     * Read and print the content of a file.
+		     *
+		     * @param filePath Path of the file to read
+		     */
+		    public static void readFromFile(String filePath)
+		    {
+		        try (BufferedReader reader = new BufferedReader(new FileReader(filePath)))
+		        {
+		            String line;
+		            while ((line = reader.readLine()) != null)
+		            {
+		                System.out.println(line);
+		            }
+		        } catch (IOException e)
+		        {
+		            System.err.println("Error reading the file: " + e.getMessage());
+		        }
+		    }
+
+		    /**
+		     * Append content to the end of a file.
+		     *
+		     * @param filePath Path of the file to append to
+		     * @param content  Content to append
+		     */
+		    public static void appendToFile(String filePath, String content)
+		    {
+		        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true)))
+		        {
+		            writer.write(content);
+		            System.out.println("Content appended successfully.");
+		        } catch (IOException e)
+		        {
+		            System.err.println("Error appending to file: " + e.getMessage());
+		        }
+		    }
+
+		    /**
+		     * Modify a specific line in a file by replacing a target string with a new string.
+		     *
+		     * @param filePath       Path of the file to modify
+		     * @param target         The string to replace
+		     * @param replacement    The replacement string
+		     */
+		    public static void modifyFile(String filePath, String target, String replacement)
+		    {
+		        try {
+		            Path path = Paths.get(filePath);
+		            // Read all lines from the file
+		            String content = new String(Files.readAllBytes(path));
+		            // Replace the target string with the replacement
+		            content = content.replace(target, replacement);
+		            // Write the modified content back to the file
+		            Files.write(path, content.getBytes());
+		            System.out.println("File modified successfully.");
+		        } catch (IOException e)
+		        {
+		            System.err.println("Error modifying the file: " + e.getMessage());
+		        }
+
+	}
+
+}
