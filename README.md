@@ -33,3 +33,6 @@ Error handling for scenarios like file not found, insufficient permissions, or i
 Demonstration of core Java file handling classes such as FileReader, FileWriter, BufferedReader, and BufferedWriter.
 Expected Outcome:
 The project will result in a robust utility that simplifies file operations for users and provides a practical understanding of Java's file handling capabilities. This will be an excellent resource for individuals exploring file I/O in Java.
+
+**********OUTPUT*********
+![Image](https://github.com/user-attachments/assets/5b602740-659a-4f16-bfb4-2fb74cca2469)
